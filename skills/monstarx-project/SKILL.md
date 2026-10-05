@@ -5,11 +5,16 @@ description: Create, edit, push, and publish real full-stack MonstarX apps. Use 
 
 # MonstarX project workflow
 
-MonstarX ships real full-stack apps (not mockups): live preview, MonstarX Cloud backend, Admin CMS, versions, secrets, publish, and GitHub sync. Use this skill when Cursor or Grok Bot should push local work to MonstarX, pull MonstarX builds back, ask the builder to change the app, or publish a shareable link — without hand-rolling MCP setup.
+MonstarX ships real full-stack apps (not mockups): live preview, MonstarX Cloud backend, Admin CMS, versions, secrets, publish, and GitHub sync. Use this skill when your coding agent or assistant (ChatGPT, Codex, Cursor or another MCP client) should push local work to MonstarX, pull MonstarX builds back, ask the builder to change the app, or publish a shareable link — without hand-rolling MCP setup.
 
 ## Available tools
 
 `get_account`, `list_projects`, `get_project`, `prepare_upload`, `import_from_github`, `push_files`, `create_project`, `read_files`, `download_project`, `send_message`, `get_messages`, `stop`, `publish_project`, `set_secrets`, `get_logs`
+
+## Pick the path for your surface
+
+- **With a shell (Codex, Cursor, Claude Code):** push and pull whole folders with `prepare_upload` / `download_project`.
+- **Without a shell (ChatGPT chat, the Claude app):** start apps with `create_project`, bring existing ones in with `import_from_github`, and use `push_files` only for a few small text files. Do not hand the user an upload command they cannot run.
 
 ## When to use
 
@@ -54,6 +59,15 @@ Use `push_files` for a few files when there is no shell upload path. Prefer `pre
 ## Import from GitHub
 
 Use `import_from_github` with the repository URL. Private repos need GitHub connected in MonstarX first.
+
+## Safety rules
+
+- Tools act only on projects in the connected account. If the user asks about someone else's account or projects, say you cannot reach them.
+- There is no delete tool. Never imitate deletion with `push_files` (`delete`) or `prepare_upload` (`force`); point the user to MonstarX itself.
+- Use `force: true` on `prepare_upload` only when the user explicitly says to overwrite changes made in MonstarX.
+- Publish only when the user asked for it in this conversation; publishing is public.
+- `set_secrets` takes only values the user gave you or asked you to copy from their local `.env`. Never invent, guess or echo a secret back.
+- `create_project` and `send_message` use the user's MonstarX plan allowance; call them only for requests the user made.
 
 ## Prove success
 

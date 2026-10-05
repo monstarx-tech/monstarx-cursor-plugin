@@ -3,6 +3,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import process from "node:process";
+import { checkOpenAIPackage, toolsInReview } from "./openai-checks.mjs";
 
 const repoRoot = process.cwd();
 const errors = [];
@@ -381,6 +382,23 @@ async function main() {
         }
       }
     }
+  }
+
+  // OpenAI Plugins Directory submission rules (listing limits, 5+3 review cases, URLs, assets, single MCP server).
+  // Pass --release to also require review.demo_recording_url (final Submit for review).
+  const openai = await checkOpenAIPackage(pluginDir, { release: process.argv.includes("--release") });
+  openai.errors.forEach(addError);
+  openai.warnings.forEach(addWarning);
+
+  // Review cases must name real MonstarX MCP tools (https://monstarx.com/docs/mcp).
+  const knownTools = new Set([
+    "get_account", "list_projects", "get_project", "prepare_upload", "import_from_github", "push_files",
+    "create_project", "read_files", "download_project", "send_message", "get_messages", "stop",
+    "publish_project", "set_secrets", "get_logs",
+  ]);
+  const rootManifest = await readJsonFile(path.join(pluginDir, "plugin.json"), "Agent Plugins plugin.json");
+  for (const name of toolsInReview(rootManifest)) {
+    if (!knownTools.has(name)) addError(`[openai] review case names unknown MonstarX tool "${name}".`);
   }
 
   summarizeAndExit();

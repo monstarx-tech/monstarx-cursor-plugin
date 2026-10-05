@@ -12,3 +12,7 @@
 *.log
 tmp/
 temp/
+
+# Build output (OpenAI plugin ZIP)
+dist/
+*.zip

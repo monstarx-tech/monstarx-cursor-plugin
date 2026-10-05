@@ -175,24 +175,30 @@ API keys act as you on every project. Keep them out of chats and source control.
 
 ## OpenAI Plugins / Dots
 
-This repo is also packaged as a portable **[Agent Plugins](https://developers.openai.com/plugins/build/plugins)** folder for ChatGPT and Codex (**Dots** reuse the same plugin packages). **Not submitted to OpenAI yet.**
+This repo is also packaged as a portable **[Agent Plugins](https://developers.openai.com/plugins/build/plugins)** folder for ChatGPT and Codex. **Dots** reuse the same plugin packages. It's prepared for the OpenAI Plugins Directory but **not submitted yet**.
 
 | Path | Role |
 | --- | --- |
-| `plugin.json` | Agent Plugins root manifest (`extensions.com.openai` listing + review stubs) |
-| `mcp.json` | Agent Plugins MCP (`streamable-http` → `https://monstarx.com/mcp`) |
-| `mcp.cursor.json` | Cursor url-only MCP (OAuth Sign in); pinned by `.cursor-plugin/plugin.json` |
-| `.cursor-plugin/plugin.json` | Cursor Marketplace identity (unchanged product surface) |
-| `skills/monstarx-project/` | Shared skill |
+| `plugin.json` | Agent Plugins root manifest: `extensions.com.openai` listing, 5 positive + 3 negative review cases, release notes |
+| `mcp.json` | Agent Plugins MCP (`streamable-http` → `https://monstarx.com/mcp`, OAuth) |
+| `mcp.cursor.json` | Cursor url-only MCP (OAuth Sign in), pinned by `.cursor-plugin/plugin.json` |
+| `.cursor-plugin/plugin.json` | Cursor Marketplace identity |
+| `skills/monstarx-project/` | Shared onboarding skill (paths for shell and no-shell surfaces, safety rules) |
 | `assets/logo.svg` | Logo + `composerIcon` |
+| `docs/openai-review.md` | Test cases, tool-annotation justifications, demo recording script |
+| `docs/openai-submission-checklist.md` | Domain challenge, OAuth, reviewer account, ZIP and portal steps |
 
-When ready to submit (do not treat this scaffold as submitted):
+Validate and build the upload ZIP:
 
-1. Fill `extensions.com.openai.review` TODO test cases (5 positive / 3 negative) and a real `demo_recording_url`.
-2. Zip the plugin root and upload at [platform.openai.com/plugins](https://platform.openai.com/plugins).
-3. Complete MCP connect + domain verification in the dashboard; enter reviewer credentials only in the portal (never in the ZIP).
+```bash
+node scripts/validate-plugin.mjs            # Cursor + OpenAI checks (warns while the demo URL is empty)
+node scripts/validate-plugin.mjs --release  # also requires review.demo_recording_url
+node scripts/build-openai-zip.mjs           # → dist/monstarx-openai-plugin-<version>.zip
+```
 
-Privacy / terms used in the listing: [Privacy Policy](https://monstarx.com/privacy), [Terms of Service](https://monstarx.com/terms). Support listing URL: [Connect coding agents](https://docs.monstarx.com/integrations/coding-agents) (email: [feedback@monstarx.com](mailto:feedback@monstarx.com)).
+Still to do before **Submit for review**: record the demo and set `review.demo_recording_url`, add explicit `destructiveHint` values on the server's read-only tools, host the domain-challenge token, and set up a reviewer account with no MFA. See the [checklist](docs/openai-submission-checklist.md). Reviewer credentials go only in the portal, never in the ZIP.
+
+Listing URLs: [Privacy Policy](https://monstarx.com/privacy) · [Terms of Service](https://monstarx.com/terms) · [Help and support](https://docs.monstarx.com/help/) (email: [support@monstarx.com](mailto:support@monstarx.com)) · [monstarx.com](https://monstarx.com).
 
 ## Marketplace submit (maintainers)
 

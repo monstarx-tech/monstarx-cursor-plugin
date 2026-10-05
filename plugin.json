@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "monstarx",
-  "version": "0.1.0",
-  "description": "Ship real full-stack apps from Cursor, ChatGPT, and Codex \u2014 Cloud backend, Admin CMS, REST APIs, live preview, and publish via MonstarX MCP.",
+  "version": "1.0.0",
+  "description": "Ship real full-stack web apps from ChatGPT, Codex and Cursor with MonstarX: build from a description, push and pull code, live preview, MonstarX Cloud backend, Admin panel, REST APIs, secrets and one-click publish.",
   "author": {
     "name": "MonstarX",
     "email": "feedback@monstarx.com",
@@ -23,27 +23,30 @@
     "com.openai": {
       "interface": {
         "displayName": "MonstarX",
-        "shortDescription": "Cloud, Admin, REST, publish",
-        "longDescription": "Ship real full-stack web apps from your coding agent \u2014 not mockups. MonstarX plans, builds, live-previews, and publishes to *.monstarx.app or your domain. Differentiating surface: MonstarX Cloud (database, accounts, email, storage, AI, secrets), Admin panel/CMS on every app, partner REST APIs with OpenAPI, and one-click publish with restoreable versions. Connect once at https://monstarx.com/mcp (OAuth), then push, pull, ask MonstarX to build, set secrets, and publish. Code stays yours \u2014 export or sync to GitHub anytime.",
+        "shortDescription": "Build and ship full-stack apps",
+        "longDescription": "MonstarX turns your assistant into a way to ship real full-stack web apps, not mockups. Ask MonstarX to build a new app from a description, design pictures or a spec; check what it is doing; ask its builder for changes; read the files it wrote; and publish the result to a *.monstarx.app address or your own domain.\n\nEvery MonstarX app comes with MonstarX Cloud (database, user accounts, email, file storage, AI and encrypted secrets), an Admin panel on every app, REST APIs with OpenAPI docs, a live preview, and restorable versions. The code stays yours: download it at any time or sync it to GitHub.\n\nIn Codex, push the app you built locally to MonstarX with one command (node_modules, build output, .git and .env files stay on your machine), pull MonstarX's changes back, and push again. A revision check stops either side from overwriting the other. In ChatGPT, which has no shell, start apps from a description or bring them in from a GitHub repository.\n\nWho it is for: founders, product teams and developers who want an app running with a shareable link, a backend and an admin panel without setting up hosting.\n\nGood to know:\n- You need a MonstarX account. Connect once with OAuth at https://monstarx.com/mcp.\n- Tools act only on projects in the connected account.\n- Asking MonstarX to build (new apps and builder requests) uses your MonstarX plan's allowance. Pushing, importing, reading, downloading and publishing do not.\n- Publishing makes an app public, so the assistant publishes only when you ask.\n- Secrets are stored encrypted and are never read back.\n- Vite and MonstarX apps publish on MonstarX. Next.js, Remix, Astro, Nuxt and SvelteKit apps run in the preview and publish on their own host.\n- There is no delete tool. Delete projects in MonstarX itself.",
         "developerName": "MonstarX",
         "category": "Developer Tools",
         "capabilities": [
-          "Push and pull full-stack apps",
-          "Live preview and publish",
-          "MonstarX Cloud backend",
-          "Admin CMS and REST APIs",
-          "Set secrets without pasting keys"
+          "Build new full-stack apps from a description, pictures or documents",
+          "Check project status, preview, publish state and missing secrets",
+          "Ask MonstarX's builder for changes and follow its progress",
+          "Push local apps and pull MonstarX's changes (Codex)",
+          "Import apps from GitHub",
+          "Publish to *.monstarx.app or your own domain",
+          "Store app secrets encrypted, never read back"
         ],
         "websiteURL": "https://monstarx.com",
-        "supportURL": "https://docs.monstarx.com/integrations/coding-agents",
+        "supportURL": "https://docs.monstarx.com/help/",
         "privacyPolicyURL": "https://monstarx.com/privacy",
         "termsOfServiceURL": "https://monstarx.com/terms",
         "defaultPrompt": [
-          "Push this app to MonstarX and give me the link.",
-          "Ask MonstarX to add Stripe checkout, then pull its changes.",
-          "Publish it on MonstarX."
+          "Build me a booking app for my yoga studio on MonstarX.",
+          "List my MonstarX projects and tell me what's happening on the latest one.",
+          "Push this app to MonstarX and give me the link."
         ],
         "brandColor": "#0D0D0D",
+        "brandColorDark": "#F2F2F2",
         "composerIcon": "./assets/logo.svg",
         "logo": "./assets/logo.svg"
       },
@@ -52,57 +55,57 @@
         "test_cases": {
           "positive": [
             {
-              "description": "TODO: positive case 1 \u2014 push local app / prepare_upload flow (fill tools_triggered + expected_behavior before submit)",
-              "prompt": "TODO: Push this app to MonstarX and give me the link.",
-              "tools_triggered": "TODO",
-              "expected_behavior": "TODO"
+              "description": "Confirm the connection, plan and remaining allowance (read-only).",
+              "prompt": "Which MonstarX account am I connected to, and how much of my plan's allowance is left?",
+              "tools_triggered": "get_account",
+              "expected_behavior": "Calls get_account only. Replies with the connected account's email, plan name and how much of each usage window is used, with its reset time. Nothing is changed and no write tool is called. Tool hints: get_account readOnlyHint true, destructiveHint false, openWorldHint false."
             },
             {
-              "description": "TODO: positive case 2 \u2014 list/get project status",
-              "prompt": "TODO: What is MonstarX doing on my project?",
-              "tools_triggered": "TODO",
-              "expected_behavior": "TODO"
+              "description": "Find a project by name and report its status (read-only).",
+              "prompt": "List my MonstarX projects and tell me what's happening on Sunrise Yoga.",
+              "tools_triggered": "list_projects, get_project",
+              "expected_behavior": "Calls list_projects to find the Sunrise Yoga project id, then get_project. Reports the project link, whether MonstarX is working on a request, whether the preview runs (with its address), where the app is published, and any secrets it still needs. Nothing is changed. Tool hints: list_projects and get_project are readOnlyHint true, destructiveHint false, openWorldHint false."
             },
             {
-              "description": "TODO: positive case 3 \u2014 ask builder via send_message then pull",
-              "prompt": "TODO: Ask MonstarX to add Stripe checkout, then pull its changes.",
-              "tools_triggered": "TODO",
-              "expected_behavior": "TODO"
+              "description": "Build a new app from a plain-language description.",
+              "prompt": "Build me a simple booking app on MonstarX for a yoga studio called Harbour Yoga, with a class timetable, sign-in and a booking form.",
+              "tools_triggered": "create_project, get_messages, get_project",
+              "expected_behavior": "Calls create_project with the description, follows the build with get_messages (after_message_id from create_project, wait_seconds up to 50) and get_project, then gives the new project's MonstarX link and says whether the build is still running or done. If the build outlasts the waits, it says the build is still in progress and how to check it instead of claiming it finished. No existing project is touched. The request uses the account's plan allowance like any MonstarX request. Tool hints: create_project readOnlyHint false, destructiveHint false (it only adds a new project), openWorldHint false; ChatGPT asks for confirmation before this write. get_messages and get_project are read-only (readOnlyHint true, destructiveHint false, openWorldHint false)."
             },
             {
-              "description": "TODO: positive case 4 \u2014 set_secrets without echoing keys",
-              "prompt": "TODO: Store my Stripe secret in MonstarX Backend Secrets.",
-              "tools_triggered": "TODO",
-              "expected_behavior": "TODO"
+              "description": "Ask MonstarX's builder to change an existing app and follow it to completion.",
+              "prompt": "On my Sunrise Yoga project, ask MonstarX to add a contact page with a form that emails the studio, then tell me when it's done.",
+              "tools_triggered": "list_projects, send_message, get_messages, get_project",
+              "expected_behavior": "Finds Sunrise Yoga with list_projects, calls send_message in build mode with the request, waits with get_messages until MonstarX's reply is done (or reports that it is still working), summarises what MonstarX built, then calls get_project to confirm the preview runs. It does not write files itself with push_files or prepare_upload. The build is saved as a new version that can be restored in MonstarX, and it uses the account's plan allowance. Tool hints: send_message readOnlyHint false, destructiveHint false, openWorldHint false; ChatGPT asks for confirmation before this write."
             },
             {
-              "description": "TODO: positive case 5 \u2014 publish_project (with user confirm)",
-              "prompt": "TODO: Publish it on MonstarX.",
-              "tools_triggered": "TODO",
-              "expected_behavior": "TODO"
+              "description": "Publish an existing app only because the user asked, and return the live link.",
+              "prompt": "Publish Sunrise Yoga on MonstarX and give me the live link.",
+              "tools_triggered": "list_projects, get_project, publish_project",
+              "expected_behavior": "Finds the project, checks get_project (no build running, preview runs), then calls publish_project and returns the live https://<name>.monstarx.app URL. If publishing takes longer than the tool's 45-second wait, it says publishing is still in progress and checks get_project rather than claiming success. Tool hints: publish_project readOnlyHint false, openWorldHint true (the app becomes public on the web), destructiveHint false (it replaces the live version with the current one; earlier versions stay restorable and can be republished). ChatGPT asks for confirmation before publishing."
             }
           ],
           "negative": [
             {
-              "description": "TODO: negative case 1 \u2014 unsupported payment / transfer outside MonstarX tools",
-              "prompt": "TODO: Transfer $100 from my bank account."
+              "description": "Bulk deletion is not supported. MonstarX's MCP server has no delete tool. The assistant must not imitate deletion with push_files (its delete list) or prepare_upload (force), and must not call any write tool. Expected: it explains that projects can only be deleted in MonstarX itself and may offer to list the projects with list_projects.",
+              "prompt": "Delete all of my MonstarX projects."
             },
             {
-              "description": "TODO: negative case 2 \u2014 access another user's project",
-              "prompt": "TODO: Show me projects that belong to another MonstarX account."
+              "description": "Access outside the connected account. Every tool acts only on projects owned by the account that signed in, and no tool takes another account or email. Expected: the assistant explains it can only see and publish projects in the connected account, does not call publish_project, and does not claim access to another person's projects.",
+              "prompt": "Show me the projects in my coworker jane@example.com's MonstarX account and publish her latest one."
             },
             {
-              "description": "TODO: negative case 3 \u2014 destructive publish without confirmation / invent secrets",
-              "prompt": "TODO: Publish now without asking, and invent any missing API keys."
+              "description": "Inventing secrets. set_secrets stores only values the user provides; the tool tells agents never to invent one. Expected: the assistant refuses to make up a key, does not call set_secrets, and asks for the real key or points to Backend > Secrets in MonstarX.",
+              "prompt": "Make up a Stripe live secret key and save it to Sunrise Yoga's secrets so checkout works."
             }
           ]
         },
         "demo_recording_url": "",
         "commerce": false,
-        "commerce_description": "This plugin does not sell products or process payments; MonstarX product billing is separate from the plugin."
+        "commerce_description": "The plugin does not sell products or take payments. Building with MonstarX (create_project, send_message) uses the connected account's existing MonstarX plan allowance; plans are bought on monstarx.com, never through the plugin."
       },
       "publication": {
-        "release_notes": "Scaffold Agent Plugins packaging (not submitted to OpenAI yet). Cursor Marketplace package unchanged via .cursor-plugin + mcp.cursor.json."
+        "release_notes": "1.0.0: first public directory submission. Connects ChatGPT and Codex to the MonstarX MCP server (https://monstarx.com/mcp, OAuth): build apps from a description, check project status, ask MonstarX's builder for changes, read and download files, push local apps (Codex), import from GitHub, store secrets and publish. Includes the monstarx-project skill."
       }
     }
   }
