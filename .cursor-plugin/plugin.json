@@ -2,7 +2,7 @@
   "name": "monstarx",
   "displayName": "MonstarX",
   "version": "0.1.0",
-  "description": "Cursor Marketplace plugin for MonstarX MCP — AI app builder with live preview, versions, publish, secrets & GitHub sync for Cursor and Grok Bot.",
+  "description": "Ship real full-stack apps from Cursor & Grok Bot via MonstarX MCP — Cloud backend, Admin CMS, REST APIs, live preview, and publish.",
   "author": {
     "name": "MonstarX",
     "email": "feedback@monstarx.com"

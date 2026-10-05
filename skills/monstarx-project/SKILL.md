@@ -1,11 +1,11 @@
 ---
 name: monstarx-project
-description: Create, edit, push, and publish MonstarX projects via the MonstarX MCP. Use when the user wants to deploy an app to MonstarX, push local changes, ask MonstarX to build, or publish a live link.
+description: Create, edit, push, and publish real full-stack MonstarX apps via MonstarX MCP. Use when the user wants to ship to MonstarX (Cloud backend, Admin, publish), push local changes, ask MonstarX to build, or get a live link.
 ---
 
 # MonstarX project workflow
 
-MonstarX is the shipping surface for agent-built apps: live preview, versions, secrets, publish, and GitHub sync. Use this skill when Cursor or Grok Bot should push local work to MonstarX, pull MonstarX builds back, ask the builder to change the app, or publish a shareable link — without hand-rolling MCP setup.
+MonstarX ships real full-stack apps (not mockups): live preview, MonstarX Cloud backend, Admin CMS, versions, secrets, publish, and GitHub sync. Use this skill when Cursor or Grok Bot should push local work to MonstarX, pull MonstarX builds back, ask the builder to change the app, or publish a shareable link — without hand-rolling MCP setup.
 
 ## Available tools
 
