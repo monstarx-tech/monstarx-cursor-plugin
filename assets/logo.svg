@@ -1,7 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
   <title id="title">MonstarX</title>
-  <desc id="desc">MonstarX geometric M mark with star accent.</desc>
-  <rect width="128" height="128" rx="24" fill="#0B1220"/>
-  <path d="M28 96V32h16l20 40 20-40h16v64H84V58L68 90H60L44 58v38H28z" fill="#F4F7FB"/>
-  <path d="M96 28l4.2 8.8 9.8 1.4-7.1 6.9 1.7 9.8L96 50.6l-8.6 4.3 1.7-9.8-7.1-6.9 9.8-1.4L96 28z" fill="#7C5CFF"/>
+  <desc id="desc">MonstarX mark — four diagonal bars forming an X, from monstarx.com branding.</desc>
+  <!-- Site theme #0d0d0d; white mark reads on light and dark marketplace chrome -->
+  <rect width="128" height="128" rx="28" fill="#0D0D0D"/>
+  <!-- Official favicon paths (viewBox 0 0 30 30), padded ~12% -->
+  <g transform="translate(16 16) scale(3.2)" fill="#FFFFFF" fill-rule="evenodd" clip-rule="evenodd">
+    <path d="M29.3493 25.3568L20.5472 16.5546L16.5546 20.5472L25.3568 29.3493L29.3493 25.3568ZM8.76813 12.7607L12.7607 8.76813L3.99257 0L0 3.99257L8.76813 12.7607ZM9.03679e-07 25.3568L8.8024 16.5543L12.795 20.5469L3.99257 29.3493L9.03679e-07 25.3568ZM20.5814 12.7605L16.5889 8.7679L25.3568 0L29.3493 3.99257L20.5814 12.7605Z"/>
+  </g>
 </svg>

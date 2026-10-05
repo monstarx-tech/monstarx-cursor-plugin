@@ -1,10 +1,12 @@
 # MonstarX Cursor plugin
 
-Ship real full-stack apps from Cursor and Grok Bot — live preview, built-in backend, admin CMS, REST APIs, and one-click publish — via [MonstarX MCP](https://monstarx.com/mcp).
+Ship real full-stack apps from Cursor and Grok Bot — live preview, built-in backend, admin CMS, REST APIs, and one-click publish — via [MonstarX's MCP endpoint](https://monstarx.com/mcp).
 
 ## What is MonstarX?
 
 [MonstarX](https://monstarx.com) is an AI app builder for **shipping real web apps**, not mockups. You describe an app in plain words; MonstarX plans it, writes the code, runs a **live preview**, tests it in real browsers, and publishes to `*.monstarx.app` or your own domain. The code is yours — export anytime or sync to GitHub.
+
+Product UI is available in **16 languages** (EN, JA, ZH-CN, PT-BR, AR, KO, TH, ID, VI, MS, HI, BN, TA, RU, SW, HA) — switch in account settings. Pricing is country-based.
 
 Under the hood every project is a full-stack app on **TanStack Start + React + TypeScript**, with a database, sign-in, email, file storage, and AI from day one. Import from Lovable, GitHub, a zip, or push from coding agents (Cursor, Claude Code, Codex, and this plugin).
 
@@ -48,7 +50,7 @@ Same backend in preview and production. Workbench **Backend** browses DB, users,
 
 ## Grok Bot + MonstarX harmony
 
-This plugin installs MonstarX MCP so Cursor’s agent and **Grok Bot** (via Cursor Marketplace plugins) can drive MonstarX without hand-rolling `mcp.json`.
+This plugin connects Cursor’s agent and **Grok Bot** to MonstarX (via Cursor Marketplace plugins) without hand-rolling `mcp.json`.
 
 - **Think → ship** — Grok Bot scopes product, UX, and copy; Cursor implements; push to MonstarX for a live preview and shareable link.
 - **Round-trip builds** — Iterate in the MonstarX workbench; pull latest into the agent, merge, push again.

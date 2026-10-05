@@ -2,7 +2,7 @@
   "name": "monstarx",
   "displayName": "MonstarX",
   "version": "0.1.0",
-  "description": "Ship real full-stack apps from Cursor & Grok Bot via MonstarX MCP — Cloud backend, Admin CMS, REST APIs, live preview, and publish.",
+  "description": "Ship real full-stack apps from Cursor & Grok Bot — Cloud backend, Admin CMS, REST APIs, live preview, and publish.",
   "author": {
     "name": "MonstarX",
     "email": "feedback@monstarx.com"
@@ -10,6 +10,6 @@
   "homepage": "https://docs.monstarx.com/integrations/coding-agents",
   "repository": "https://github.com/monstarx-tech/monstarx-cursor-plugin",
   "license": "MIT",
-  "keywords": ["monstarx", "mcp", "coding-agents", "ai-app-builder", "deploy"],
+  "keywords": ["monstarx", "ai-app-builder", "mcp", "coding-agents", "deploy", "full-stack"],
   "logo": "assets/logo.svg"
 }

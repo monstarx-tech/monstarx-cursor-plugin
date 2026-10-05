@@ -1,6 +1,6 @@
 ---
 name: monstarx-project
-description: Create, edit, push, and publish real full-stack MonstarX apps via MonstarX MCP. Use when the user wants to ship to MonstarX (Cloud backend, Admin, publish), push local changes, ask MonstarX to build, or get a live link.
+description: Create, edit, push, and publish real full-stack MonstarX apps. Use when the user wants to ship to MonstarX (Cloud backend, Admin, publish), push local changes, ask MonstarX to build, or get a live link.
 ---
 
 # MonstarX project workflow
