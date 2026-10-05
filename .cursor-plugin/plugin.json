@@ -11,5 +11,6 @@
   "repository": "https://github.com/monstarx-tech/monstarx-cursor-plugin",
   "license": "MIT",
   "keywords": ["monstarx", "ai-app-builder", "mcp", "coding-agents", "deploy", "full-stack"],
-  "logo": "assets/logo.svg"
+  "logo": "assets/logo.svg",
+  "mcpServers": "./mcp.cursor.json"
 }

@@ -1,0 +1,109 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "monstarx",
+  "version": "0.1.0",
+  "description": "Ship real full-stack apps from Cursor, ChatGPT, and Codex \u2014 Cloud backend, Admin CMS, REST APIs, live preview, and publish via MonstarX MCP.",
+  "author": {
+    "name": "MonstarX",
+    "email": "feedback@monstarx.com",
+    "url": "https://monstarx.com"
+  },
+  "homepage": "https://monstarx.com",
+  "repository": "https://github.com/monstarx-tech/monstarx-cursor-plugin",
+  "license": "MIT",
+  "keywords": [
+    "monstarx",
+    "ai-app-builder",
+    "mcp",
+    "coding-agents",
+    "deploy",
+    "full-stack"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "MonstarX",
+        "shortDescription": "Cloud, Admin, REST, publish",
+        "longDescription": "Ship real full-stack web apps from your coding agent \u2014 not mockups. MonstarX plans, builds, live-previews, and publishes to *.monstarx.app or your domain. Differentiating surface: MonstarX Cloud (database, accounts, email, storage, AI, secrets), Admin panel/CMS on every app, partner REST APIs with OpenAPI, and one-click publish with restoreable versions. Connect once at https://monstarx.com/mcp (OAuth), then push, pull, ask MonstarX to build, set secrets, and publish. Code stays yours \u2014 export or sync to GitHub anytime.",
+        "developerName": "MonstarX",
+        "category": "Developer Tools",
+        "capabilities": [
+          "Push and pull full-stack apps",
+          "Live preview and publish",
+          "MonstarX Cloud backend",
+          "Admin CMS and REST APIs",
+          "Set secrets without pasting keys"
+        ],
+        "websiteURL": "https://monstarx.com",
+        "supportURL": "https://docs.monstarx.com/integrations/coding-agents",
+        "privacyPolicyURL": "https://monstarx.com/privacy",
+        "termsOfServiceURL": "https://monstarx.com/terms",
+        "defaultPrompt": [
+          "Push this app to MonstarX and give me the link.",
+          "Ask MonstarX to add Stripe checkout, then pull its changes.",
+          "Publish it on MonstarX."
+        ],
+        "brandColor": "#0D0D0D",
+        "composerIcon": "./assets/logo.svg",
+        "logo": "./assets/logo.svg"
+      },
+      "onboardingSkill": "./skills/monstarx-project/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "TODO: positive case 1 \u2014 push local app / prepare_upload flow (fill tools_triggered + expected_behavior before submit)",
+              "prompt": "TODO: Push this app to MonstarX and give me the link.",
+              "tools_triggered": "TODO",
+              "expected_behavior": "TODO"
+            },
+            {
+              "description": "TODO: positive case 2 \u2014 list/get project status",
+              "prompt": "TODO: What is MonstarX doing on my project?",
+              "tools_triggered": "TODO",
+              "expected_behavior": "TODO"
+            },
+            {
+              "description": "TODO: positive case 3 \u2014 ask builder via send_message then pull",
+              "prompt": "TODO: Ask MonstarX to add Stripe checkout, then pull its changes.",
+              "tools_triggered": "TODO",
+              "expected_behavior": "TODO"
+            },
+            {
+              "description": "TODO: positive case 4 \u2014 set_secrets without echoing keys",
+              "prompt": "TODO: Store my Stripe secret in MonstarX Backend Secrets.",
+              "tools_triggered": "TODO",
+              "expected_behavior": "TODO"
+            },
+            {
+              "description": "TODO: positive case 5 \u2014 publish_project (with user confirm)",
+              "prompt": "TODO: Publish it on MonstarX.",
+              "tools_triggered": "TODO",
+              "expected_behavior": "TODO"
+            }
+          ],
+          "negative": [
+            {
+              "description": "TODO: negative case 1 \u2014 unsupported payment / transfer outside MonstarX tools",
+              "prompt": "TODO: Transfer $100 from my bank account."
+            },
+            {
+              "description": "TODO: negative case 2 \u2014 access another user's project",
+              "prompt": "TODO: Show me projects that belong to another MonstarX account."
+            },
+            {
+              "description": "TODO: negative case 3 \u2014 destructive publish without confirmation / invent secrets",
+              "prompt": "TODO: Publish now without asking, and invent any missing API keys."
+            }
+          ]
+        },
+        "demo_recording_url": "",
+        "commerce": false,
+        "commerce_description": "This plugin does not sell products or process payments; MonstarX product billing is separate from the plugin."
+      },
+      "publication": {
+        "release_notes": "Scaffold Agent Plugins packaging (not submitted to OpenAI yet). Cursor Marketplace package unchanged via .cursor-plugin + mcp.cursor.json."
+      }
+    }
+  }
+}

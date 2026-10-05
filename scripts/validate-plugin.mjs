@@ -293,6 +293,96 @@ async function main() {
     }
   }
 
+  // Agent Plugins portable package (OpenAI ChatGPT/Codex) — optional alongside Cursor
+  const agentPluginPath = path.join(pluginDir, "plugin.json");
+  if (await pathExists(agentPluginPath)) {
+    const agentPlugin = await readJsonFile(agentPluginPath, "Agent Plugins plugin.json");
+    if (agentPlugin) {
+      if (agentPlugin.$schema !== "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json") {
+        addError(
+          'Root plugin.json must set $schema to https://agent-plugins.org/schemas/1.0.0/plugin.schema.json'
+        );
+      }
+      if (typeof agentPlugin.name !== "string" || !pluginNamePattern.test(agentPlugin.name)) {
+        addError(
+          'Root plugin.json "name" must be lowercase and use only alphanumerics, hyphens, and periods.'
+        );
+      }
+      const openai = agentPlugin.extensions && agentPlugin.extensions["com.openai"];
+      if (!openai || typeof openai !== "object") {
+        addWarning('Root plugin.json has no extensions.com.openai (needed for OpenAI listing metadata).');
+      } else {
+        const iface = openai.interface;
+        if (iface) {
+          for (const field of ["logo", "composerIcon"]) {
+            if (typeof iface[field] === "string") {
+              await validateReferencedPath(pluginDir, `extensions.com.openai.interface.${field}`, iface[field], pluginName);
+            }
+          }
+          if (Array.isArray(iface.screenshots)) {
+            for (const shot of iface.screenshots) {
+              await validateReferencedPath(pluginDir, "extensions.com.openai.interface.screenshots", shot, pluginName);
+            }
+          }
+        }
+        if (typeof openai.onboardingSkill === "string") {
+          await validateReferencedPath(
+            pluginDir,
+            "extensions.com.openai.onboardingSkill",
+            openai.onboardingSkill,
+            pluginName
+          );
+        }
+      }
+    }
+  }
+
+  // Dual MCP: Agent Plugins mcp.json may use type streamable-http; Cursor uses mcp.cursor.json (url-only)
+  if (await pathExists(mcpPath)) {
+    const mcp = await readJsonFile(mcpPath, "mcp.json (re-check)");
+    if (mcp) {
+      if (mcp.$schema === "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json") {
+        for (const [serverName, server] of Object.entries(mcp.mcpServers || {})) {
+          if (!server || typeof server !== "object") continue;
+          if (server.type === "streamable-http" || server.type === "sse") {
+            if (typeof server.url !== "string" || !server.url.startsWith("https://")) {
+              addError(`mcp.json server "${serverName}" with type ${server.type} needs an https url.`);
+            }
+          } else if (server.type === "stdio") {
+            if (typeof server.command !== "string") {
+              addError(`mcp.json server "${serverName}" with type stdio needs a command.`);
+            }
+          } else if (server.type) {
+            addError(`mcp.json server "${serverName}" has unsupported type "${server.type}".`);
+          }
+        }
+        const cursorMcp = path.join(pluginDir, "mcp.cursor.json");
+        if (!(await pathExists(cursorMcp))) {
+          addWarning(
+            "mcp.json uses Agent Plugins schema; add mcp.cursor.json (url-only) and pin it from .cursor-plugin/plugin.json so Cursor CLI does not drop type: streamable-http."
+          );
+        } else {
+          const cursorCfg = await readJsonFile(cursorMcp, "mcp.cursor.json");
+          if (cursorCfg) {
+            for (const [serverName, server] of Object.entries(cursorCfg.mcpServers || {})) {
+              if (server && server.type === "streamable-http") {
+                addError(
+                  `mcp.cursor.json server "${serverName}" must not use type streamable-http (Cursor CLI drops the config). Use url-only.`
+                );
+              }
+            }
+          }
+          const pinned = pluginManifest.mcpServers;
+          if (pinned !== "./mcp.cursor.json" && pinned !== "mcp.cursor.json") {
+            addWarning(
+              '.cursor-plugin/plugin.json should set "mcpServers": "./mcp.cursor.json" when dual MCP formats are used.'
+            );
+          }
+        }
+      }
+    }
+  }
+
   summarizeAndExit();
 }
 

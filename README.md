@@ -135,7 +135,7 @@ If you are not using the marketplace package yet, add to `~/.cursor/mcp.json`:
 
 Then sign in from Settings → MCP (or `agent mcp login monstarx` in Cursor’s CLI agent).
 
-This matches the official MonstarX Cursor snippet and is what this plugin ships in `mcp.json` (url-only / OAuth).
+This matches the official MonstarX Cursor snippet. For Cursor Marketplace installs this repo ships the same url-only shape in `mcp.cursor.json` (pinned from `.cursor-plugin/plugin.json`). Root `mcp.json` uses the Agent Plugins shape (`type: streamable-http`) for OpenAI ChatGPT/Codex — see [OpenAI Plugins / Dots](#openai-plugins--dots) below. Do not put `type: streamable-http` in Cursor's own `~/.cursor/mcp.json`; Cursor's CLI can drop the whole file when that type is present.
 
 ## API key for CI / headless
 
@@ -171,6 +171,28 @@ API keys act as you on every project. Keep them out of chats and source control.
 - Product: [monstarx.com](https://monstarx.com) · Cloud: [mxcloud.monstarx.com](https://mxcloud.monstarx.com)
 - In product: Ask Luna
 - Email: [feedback@monstarx.com](mailto:feedback@monstarx.com)
+
+
+## OpenAI Plugins / Dots
+
+This repo is also packaged as a portable **[Agent Plugins](https://developers.openai.com/plugins/build/plugins)** folder for ChatGPT and Codex (**Dots** reuse the same plugin packages). **Not submitted to OpenAI yet.**
+
+| Path | Role |
+| --- | --- |
+| `plugin.json` | Agent Plugins root manifest (`extensions.com.openai` listing + review stubs) |
+| `mcp.json` | Agent Plugins MCP (`streamable-http` → `https://monstarx.com/mcp`) |
+| `mcp.cursor.json` | Cursor url-only MCP (OAuth Sign in); pinned by `.cursor-plugin/plugin.json` |
+| `.cursor-plugin/plugin.json` | Cursor Marketplace identity (unchanged product surface) |
+| `skills/monstarx-project/` | Shared skill |
+| `assets/logo.svg` | Logo + `composerIcon` |
+
+When ready to submit (do not treat this scaffold as submitted):
+
+1. Fill `extensions.com.openai.review` TODO test cases (5 positive / 3 negative) and a real `demo_recording_url`.
+2. Zip the plugin root and upload at [platform.openai.com/plugins](https://platform.openai.com/plugins).
+3. Complete MCP connect + domain verification in the dashboard; enter reviewer credentials only in the portal (never in the ZIP).
+
+Privacy / terms used in the listing: [Privacy Policy](https://monstarx.com/privacy), [Terms of Service](https://monstarx.com/terms). Support listing URL: [Connect coding agents](https://docs.monstarx.com/integrations/coding-agents) (email: [feedback@monstarx.com](mailto:feedback@monstarx.com)).
 
 ## Marketplace submit (maintainers)
 
