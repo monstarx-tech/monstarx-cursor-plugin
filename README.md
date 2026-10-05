@@ -2,8 +2,6 @@
 
 Cursor Marketplace plugin for the **MonstarX platform MCP**. Install it to create, edit, push, and publish [MonstarX](https://monstarx.com) projects from Cursor / your coding agent.
 
-> This is the **platform** MCP (`https://monstarx.com/mcp`), not Country MCP.
-
 ## What you get
 
 - MCP server entry pointed at `https://monstarx.com/mcp`
