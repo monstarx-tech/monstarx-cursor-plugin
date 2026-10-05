@@ -5,8 +5,6 @@ description: Create, edit, push, and publish MonstarX projects via the MonstarX 
 
 # MonstarX project workflow
 
-Use the **MonstarX platform MCP** at `https://monstarx.com/mcp` (not Country MCP). Prefer browser OAuth / Sign in. API keys are for CI only.
-
 ## Available tools
 
 `get_account`, `list_projects`, `get_project`, `prepare_upload`, `import_from_github`, `push_files`, `create_project`, `read_files`, `download_project`, `send_message`, `get_messages`, `stop`, `publish_project`, `set_secrets`, `get_logs`
