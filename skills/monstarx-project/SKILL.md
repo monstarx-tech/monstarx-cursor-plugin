@@ -5,6 +5,8 @@ description: Create, edit, push, and publish MonstarX projects via the MonstarX 
 
 # MonstarX project workflow
 
+MonstarX is the shipping surface for agent-built apps: live preview, versions, secrets, publish, and GitHub sync. Use this skill when Cursor or Grok Bot should push local work to MonstarX, pull MonstarX builds back, ask the builder to change the app, or publish a shareable link — without hand-rolling MCP setup.
+
 ## Available tools
 
 `get_account`, `list_projects`, `get_project`, `prepare_upload`, `import_from_github`, `push_files`, `create_project`, `read_files`, `download_project`, `send_message`, `get_messages`, `stop`, `publish_project`, `set_secrets`, `get_logs`
