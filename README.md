@@ -90,7 +90,7 @@ Keep keys out of chats and source control. Revoke unused keys in Settings. The m
 ```text
 .
 ├── .cursor-plugin/plugin.json   # Marketplace manifest
-├── mcp.json                     # Platform MCP (url-only / OAuth)
+├── mcp.json                     # MonstarX MCP (url-only / OAuth)
 ├── assets/logo.svg
 ├── skills/monstarx-project/SKILL.md
 ├── scripts/validate-plugin.mjs
