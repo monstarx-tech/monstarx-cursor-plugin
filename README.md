@@ -1,6 +1,6 @@
 # MonstarX Cursor plugin
 
-Cursor Marketplace plugin for the **MonstarX platform MCP**. Install it to create, edit, push, and publish [MonstarX](https://monstarx.com) projects from Cursor / your coding agent.
+Cursor Marketplace plugin for the **MonstarX MCP**. Install it to create, edit, push, and publish [MonstarX](https://monstarx.com) projects from Cursor / your coding agent.
 
 ## What you get
 
