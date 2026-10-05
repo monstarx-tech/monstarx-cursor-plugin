@@ -1,6 +1,6 @@
 ---
 name: monstarx-project
-description: Create, edit, push, and publish MonstarX projects via the MonstarX platform MCP. Use when the user wants to deploy an app to MonstarX, push local changes, ask MonstarX to build, or publish a live link.
+description: Create, edit, push, and publish MonstarX projects via the MonstarX MCP. Use when the user wants to deploy an app to MonstarX, push local changes, ask MonstarX to build, or publish a live link.
 ---
 
 # MonstarX project workflow
